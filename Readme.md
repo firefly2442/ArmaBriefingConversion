@@ -28,8 +28,8 @@ python run.py /full_path_to_missions_folder/ /empty_folder_for_converted_mission
 I would recommend using full paths as opposed to relative.
 
 
-** I'm not responsible for lost missions or issues. Make
-backups!  You have been warned. **
+__I'm not responsible for lost missions or issues. Make
+backups!  You have been warned.__
 
 
 ### Troubleshooting ###

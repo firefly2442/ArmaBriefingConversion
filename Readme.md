@@ -27,6 +27,7 @@ python run.py /full_path_to_missions_folder/ /empty_folder_for_converted_mission
 
 I would recommend using full paths as opposed to relative.
 
+The folder for where you will be saving the converted missions must be empty.
 
 __I'm not responsible for lost missions or issues. Make
 backups!  You have been warned.__

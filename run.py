@@ -43,7 +43,8 @@ def parseBriefing(directory, output):
 
 	objs = []
 	for i in range(1, number_objs+1):
-		objs.append(re.search(r'(?<=<a name="OBJ_' + str(i) + '"></a>).*', all_lines).group())
+		if "OBJ_"+str(i) in all_lines: #make sure the objective exists before searching for it
+			objs.append(re.search(r'(?<=<a name="OBJ_' + str(i) + '"></a>).*', all_lines).group())
 	
 	number_debriefings = len(re.findall(r'(?<=<a name="[D|d]ebriefing:End)(\d)', all_lines))
 	#print "Number endings: " + str(number_debriefings)

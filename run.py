@@ -1,10 +1,10 @@
 import os, sys, re, shutil
 
 #ArmaBriefingConversion
+#https://github.com/firefly2442/ArmaBriefingConversion
 
 
 #python run.py ./mymissions/ ./myconvertedmissions/
-
 
 
 def parseBriefing(directory, output):
@@ -22,6 +22,9 @@ def parseBriefing(directory, output):
 	all_lines = all_lines.replace('<a name = "', '<a name="')
 	all_lines = all_lines.replace('<a name ="', '<a name="')
 	all_lines = all_lines.replace('<a name= "', '<a name="')
+
+	#This website is useful for developing regular expressions
+	#http://gskinner.com/RegExr/
 
 	#TODO: this title regex needs to be fixed so it works across multiple lines
 	title = re.search(r'(?<=<title>)(\w)*(?=</title>)', all_lines).group()	

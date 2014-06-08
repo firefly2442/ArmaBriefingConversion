@@ -48,7 +48,7 @@ def parseBriefing(directory, output):
 	plan = re.search(r'(?<=<a name="[P|p]lan">).*(?=\<a name="OBJ_1")', all_lines, re.DOTALL|re.MULTILINE).group()
 	plan = cleanHTMLComments(plan)
 	regex = re.compile(r'<a href="marker:(.*?)">(.*?)</a>', re.DOTALL|re.MULTILINE)
-	plan = regex.sub(r'<marker name = "\1">\2</marker>', plan)
+	plan = regex.sub(r"<marker name = '\1'>\2</marker>", plan)
 	#print "Plan: " + plan
 	#TODO: optional
 	# search and find MySection groups (may not exist)

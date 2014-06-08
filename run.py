@@ -103,8 +103,8 @@ def writeBriefingSQF(output, main, plan, objs):
 	# this is just a quirk of Arma
 	briefingSQF.write('// tasks need to be in reversed order\n')
 	for i in reversed(range(len(objs))):
-		briefingSQF.write('_objective'+str(i)+' = player createSimpleTask ["' + objs[i] + '"];\n')
-		briefingSQF.write('_objective'+str(i)+' setSimpleTaskDescription ["' + objs[i] + '", "' + objs[i] + '", "' + objs[i] + '"];\n')
+		briefingSQF.write('objective'+str(i)+' = player createSimpleTask ["' + objs[i] + '"];\n')
+		briefingSQF.write('objective'+str(i)+' setSimpleTaskDescription ["' + objs[i] + '", "' + objs[i] + '", "' + objs[i] + '"];\n')
 
 	briefingSQF.close()
 

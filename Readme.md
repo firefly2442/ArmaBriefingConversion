@@ -6,6 +6,8 @@ to the new briefing system used in Arma2.  It parses
 the briefing.html file and pulls out the appropriate
 sections and creates a briefing.sqf file.  Debriefing
 is still kept and saved to a new briefing.html file.
+An init.sqf is also created and the briefing.sqf
+file is set to execVM.
 
 
 ### Requirements: ###

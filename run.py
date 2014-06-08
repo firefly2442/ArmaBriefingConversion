@@ -12,14 +12,12 @@ html_tag_remove = ["<h2>", "</h2>", "<h6>", "</h6>", "<p>", "</p>", "<hr>", "<b>
 html_tag_find = ["<br>"]
 html_tag_replace = ["<br/>"]
 
-def parseBriefing(directory, output):
+def parseBriefing(directory, output, briefing_names):
 	#Open briefing.html for reading
-	if os.path.isfile(directory + "/briefing.html"):
-		with open(directory + "/briefing.html", "r") as briefingHTML:
-			all_lines = briefingHTML.read()
-	else:
-		with open(directory + "/Briefing.html", "r") as briefingHTML:
-			all_lines = briefingHTML.read()
+	for briefing in briefing_names:
+		if os.path.isfile(directory + "/" + briefing):
+			with open(directory + "/" + briefing, "r") as briefingHTML:
+				all_lines = briefingHTML.read()
 
 	#remove any HTML tag specified above
 	for tag in html_tag_remove:
@@ -153,12 +151,14 @@ for root, dirnames, filenames in os.walk(folder):
 	#print filenames
 
 	subsection = root[len(folder):]
-	#print "Subsection: " + subsection	
+	#print "Subsection: " + subsection
+
+	briefing_names = ["briefing.html", "Briefing.html", "briefing.HTML", "Briefing.HTML"]
 
 	for filename in filenames:
-		if filename == "briefing.html" or filename == "Briefing.html":
+		if filename in briefing_names:
 			print "Found briefing in: " + root
-			parseBriefing(root, output+subsection)
+			parseBriefing(root, output+subsection, briefing_names)
 		elif filename == "init.sqf":
 			pass #do nothing, will be parsed later
 		else:

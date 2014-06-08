@@ -6,6 +6,11 @@ import os, sys, re, shutil
 
 #python run.py ./mymissions/ ./myconvertedmissions/
 
+#these tags will be removed from the briefing.html file
+html_tag_remove = ["<h2>", "</h2>", "<h6>", "</h6>", "<p>", "</p>", "<hr>", "<b>", "</b>"]
+#these tags will be found and replaced from the briefing.html file
+html_tag_find = ["<br>"]
+html_tag_replace = ["<br/>"]
 
 def parseBriefing(directory, output):
 	#Open briefing.html for reading
@@ -16,6 +21,12 @@ def parseBriefing(directory, output):
 		with open(directory + "/Briefing.html", "r") as briefingHTML:
 			all_lines = briefingHTML.read()
 
+	#remove any HTML tag specified above
+	for tag in html_tag_remove:
+		all_lines = all_lines.replace(tag, "")
+	#replace any HTML tag specified above
+	for i in range(0, len(html_tag_find)):
+		all_lines = all_lines.replace(html_tag_find[i], html_tag_replace[i])
 
 	#Python doesn't support variable length lookbehinds so we need to do
 	#some trickery to get around possible spaces that could occur in the regexes

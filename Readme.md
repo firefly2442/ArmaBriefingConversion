@@ -18,6 +18,9 @@ is still kept and saved to a new briefing.html file.
 This program will process ALL missions in the folder you specify.
 It's recursive so this means all folders, subfolders, etc.
 
+Edit `run.py` and make any changes you wish to `html_tag_remove`, `html_tag_find`, and
+`html_tag_replace`.  An attempt is made to try to find these in the `briefing.html` file.
+
 Open a commandline terminal and change directory to the location
 of ArmaBriefingConversion.  Then type the following:
 

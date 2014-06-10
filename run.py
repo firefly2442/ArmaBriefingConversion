@@ -36,7 +36,7 @@ def parseBriefing(directory, output, briefing_names):
 	#http://gskinner.com/RegExr/
 
 	#TODO: this title regex needs to be fixed so it works across multiple lines
-	title = re.search(r'(?<=<title>)(\w)*(?=</title>)', all_lines).group()	
+	title = re.search(r'(?<=<title>)(.*)(?=<\/title>)', all_lines).group()
 	#print "Title: " + title
 
 	main = re.search(r'(?<=<a name="[M|m]ain">).*(?=\<a name="[P|p]lan">)', all_lines, re.DOTALL|re.MULTILINE)

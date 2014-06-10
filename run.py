@@ -39,18 +39,22 @@ def parseBriefing(directory, output, briefing_names):
 	title = re.search(r'(?<=<title>)(\w)*(?=</title>)', all_lines).group()	
 	#print "Title: " + title
 
-	main = re.search(r'(?<=<a name="[M|m]ain">).*(?=\<a name="[P|p]lan">)', all_lines, re.DOTALL|re.MULTILINE).group()
-	main = cleanHTMLComments(main)
-	#print "Main: " + main
+	main = re.search(r'(?<=<a name="[M|m]ain">).*(?=\<a name="[P|p]lan">)', all_lines, re.DOTALL|re.MULTILINE)
+	if main:
+		main = cleanHTMLComments(main.group())
+	else:
+		main = "Empty main section.\n"
 	
-	plan = re.search(r'(?<=<a name="[P|p]lan">).*(?=\<a name="OBJ_1")', all_lines, re.DOTALL|re.MULTILINE).group()
-	plan = cleanHTMLComments(plan)
-	regex = re.compile(r'<a href="marker:(.*?)">(.*?)</a>', re.DOTALL|re.MULTILINE)
-	plan = regex.sub(r"<marker name = '\1'>\2</marker>", plan)
-	#print "Plan: " + plan
-	#TODO: optional
-	# search and find MySection groups (may not exist)
-	# add these as additional diary entries
+	plan = re.search(r'(?<=<a name="[P|p]lan">).*(?=\<a name="OBJ_1")', all_lines, re.DOTALL|re.MULTILINE)
+	if plan:
+		plan = cleanHTMLComments(plan.group())
+		regex = re.compile(r'<a href="marker:(.*?)">(.*?)</a>', re.DOTALL|re.MULTILINE)
+		plan = regex.sub(r"<marker name = '\1'>\2</marker>", plan)
+		#TODO: optional
+		# search and find MySection groups (may not exist)
+		# add these as additional diary entries
+	else:
+		plan = "Empty plan section.\n"
 
 	number_objs = len(re.findall(r'(?<=<a name="OBJ_)(\d)', all_lines))
 	#print "Number objectives: " + str(number_objs)

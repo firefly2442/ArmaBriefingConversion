@@ -38,6 +38,11 @@ __I'm not responsible for lost missions or issues. Make
 backups!  You have been warned.__
 
 
+### Known Issues ###
+
+If your briefing.html file has HTML tags that are in ALL CAPITAL LETTERS, the
+program will fail.  Sorry, you'll have to put them in lowercase yourself first.
+
 ### Troubleshooting ###
 
 "This doesn't work for my mission..."

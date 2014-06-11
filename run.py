@@ -41,13 +41,14 @@ def parseBriefing(directory, output, briefing_names):
 		title = title_search.group()
 	else:
 		title = "Missing Title"
-	#print "Title: " + title
+		print "WARNING: missing title: \n", directory,"\n\n"
 
 	main = re.search(r'(?<=<a name="[M|m]ain">).*(?=\<a name="[P|p]lan">)', all_lines, re.DOTALL|re.MULTILINE)
 	if main:
 		main = cleanHTMLComments(main.group())
 	else:
 		main = "Empty main section.\n"
+		print "WARNING: missing main section: \n", directory,"\n\n"
 	
 	plan = re.search(r'(?<=<a name="[P|p]lan">).*(?=\<a name="OBJ_1")', all_lines, re.DOTALL|re.MULTILINE)
 	if plan:
@@ -59,6 +60,7 @@ def parseBriefing(directory, output, briefing_names):
 		# add these as additional diary entries
 	else:
 		plan = "Empty plan section.\n"
+		print "WARNING: missing plan section: \n", directory,"\n\n"
 
 	number_objs = len(re.findall(r'(?<=<a name="OBJ_)(\d)', all_lines))
 	#print "Number objectives: " + str(number_objs)
@@ -66,7 +68,12 @@ def parseBriefing(directory, output, briefing_names):
 	objs = []
 	for i in range(1, number_objs+1):
 		if "OBJ_"+str(i) in all_lines: #make sure the objective exists before searching for it
-			objs.append(re.search(r'(?<=<a name="OBJ_' + str(i) + '"></a>).*', all_lines).group())
+			obj_search = re.search(r'(?<=<a name="OBJ_' + str(i) + '"></a>).*', all_lines)
+			if obj_search:
+				objs.append(obj_search.group())
+			else:
+				print "ERROR SKIPPING MISSION: unable to parse objective ",i," in: \n", directory,"\n\n"
+				return
 	
 	number_debriefings = len(re.findall(r'(?<=<a name="[D|d]ebriefing:End)(\d)', all_lines))
 	#print "Number endings: " + str(number_debriefings)
@@ -167,7 +174,7 @@ for root, dirnames, filenames in os.walk(folder):
 
 	for filename in filenames:
 		if filename in briefing_names:
-			print "Found briefing in: " + root
+			#print "Found briefing in: " + root
 			parseBriefing(root, output+subsection, briefing_names)
 		elif filename == "init.sqf":
 			pass #do nothing, will be parsed later

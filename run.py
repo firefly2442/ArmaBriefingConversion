@@ -70,7 +70,9 @@ def parseBriefing(directory, output, briefing_names):
 	debriefings = []
 	for i in range(1, number_debriefings+1):
 		if i < number_debriefings:
-			debriefings.append(re.search(r'(<a name="[D|d]ebriefing:End' + str(i) + ')(.*)(?=\<a name="[D|d]ebriefing:[E|e]nd' + str(i+1) + ')', all_lines, re.DOTALL|re.MULTILINE).group())
+			debrief_search = re.search(r'(<a name="[D|d]ebriefing:End' + str(i) + ')(.*)(?=\<a name="[D|d]ebriefing:[E|e]nd' + str(i+1) + ')', all_lines, re.DOTALL|re.MULTILINE)
+			if debrief_search:
+				debriefings.append(debrief_search.group())
 		else: #last debrief, use special regex
 			#TODO: this last one could have more than just the final debrief
 			# what would be a good way to process this?

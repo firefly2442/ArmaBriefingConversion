@@ -33,7 +33,7 @@ def parseBriefing(directory, output, briefing_names):
 	all_lines = all_lines.replace('<a name= "', '<a name="')
 
 	#This website is useful for developing regular expressions
-	#http://gskinner.com/RegExr/
+	#http://gskinner.com/RegExr/ - or - http://regex101.com
 
 	#TODO: this title regex needs to be fixed so it works across multiple lines
 	title = re.search(r'(?<=<title>)(.*)(?=<\/title>)', all_lines).group()

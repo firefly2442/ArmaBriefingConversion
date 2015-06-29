@@ -17,7 +17,8 @@ def parseBriefing(directory, output, briefing_names):
 	for briefing in briefing_names:
 		if os.path.isfile(directory + "/" + briefing):
 			with open(directory + "/" + briefing, "r") as briefingHTML:
-				all_lines = briefingHTML.read()
+				#all_lines = briefingHTML.read()
+				all_lines = "\n".join(briefingHTML.read().splitlines())
 
 	#remove any HTML tag specified above
 	for tag in html_tag_remove:
